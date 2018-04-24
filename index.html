@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Colorlib Medi+</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300, 400, 700" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+  <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+
+  <!-- Theme Style -->
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+
+  <header role="banner">
+    <div class="top-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-5">
+            <ul class="social list-unstyled">
+              <li>
+                <a href="#">
+                  <span class="fa fa-facebook"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="fa fa-twitter"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="fa fa-instagram"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-sm-6 col-7 text-right">
+            <p class="mb-0">
+              <!--<a href="#" class="cta-btn" data-toggle="modal" data-target="#modalAppointment">Make an Appointment</a></p>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Medi
+          <span>+</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample05">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="services.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="#">Institute</a>
+                <a class="dropdown-item" href="#">Departments</a>
+                <a class="dropdown-item" href="services.html">Services</a>
+              </div>
+
+            </li>
+            <!--<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="doctors.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Doctors</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown05">
+                  <a class="dropdown-item active" href="doctors.html">Find Doctors</a>
+                  <a class="dropdown-item" href="#">Practitioner</a>
+                </div>
+              </li>-->
+            <li class="nav-item">
+              <a class="nav-link" href="news.html">News</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li>
+              <a class="nav-link" id="authorize-button" style="display: none;">Sign In</a>
+              <a class="nav-link" id="signout-button" style="display: none;">Sign Out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- END header -->
+
+
+  <section class="home-slider inner-page owl-carousel">
+    <div class="slider-item" style="background-image: url('img/slider-2.jpg');">
+
+      <div class="container">
+        <div class="row slider-text align-items-center">
+          <div class="col-md-7 col-sm-12 element-animate">
+            <h1>Doctors</h1>
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- END slider -->
+
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center element-animate">
+        <div class="col-md-6">
+
+          <form>
+            <label for="search-doctor">Search Doctors</label>
+            <div class="input-group input-group-lg">
+              <input type="text" id="search-doctor" class="form-control" placeholder="Search for..." aria-label="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" onclick="searchDoctors()" type="button">Go!</button>
+              </span>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <pre id="content"></pre>
+  <!-- <p id="demo">Click the button to get your position.</p> -->
+
+  <!-- <button onclick="getLocation()">Try It</button> -->
+
+  <div id="map"></div>
+
+
+  <!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->
+  <script>
+    var x = document.getElementById("demo");
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+      var latlon = new google.maps.LatLng(lat, lon)
+      var mapholder = document.getElementById('mapholder')
+      mapholder.style.height = '250px';
+      mapholder.style.width = '500px';
+
+      var myOptions = {
+        center: latlon, zoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+      }
+
+      var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+      var marker = new google.maps.Marker({ position: latlon, map: map, title: "You are here!" });
+    }
+
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          x.innerHTML = "User denied the request for Geolocation."
+          break;
+        case error.POSITION_UNAVAILABLE:
+          x.innerHTML = "Location information is unavailable."
+          break;
+        case error.TIMEOUT:
+          x.innerHTML = "The request to get user location timed out."
+          break;
+        case error.UNKNOWN_ERROR:
+          x.innerHTML = "An unknown error occurred."
+          break;
+      }
+    }
+  </script>
+
+  <section class="section bg-light">
+    <div class="container">
+      <div class="row">
+        <div>
+          <div class="row" id="searchedDoctors">
+
+          </div>
+        </div>
+
+
+        <div class="col-md-3 element-animate">
+          <div class="media d-block media-custom text-center">
+            <img src="img/doctor_1.jpg" alt="Image Placeholder" class="img-fluid">
+            <div class="media-body">
+              <h3 class="mt-0 text-black">Dr. Janice Doe</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>
+                <a href="#" class="p-2">
+                  <span class="fa fa-facebook"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-twitter"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-linkedin"></span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 element-animate">
+          <div class="media d-block media-custom text-center">
+            <img src="img/doctor_2.jpg" alt="Image Placeholder" class="img-fluid">
+            <div class="media-body">
+              <h3 class="mt-0 text-black">Dr. Janice Doe</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>
+                <a href="#" class="p-2">
+                  <span class="fa fa-facebook"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-twitter"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-linkedin"></span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 element-animate">
+          <div class="media d-block media-custom text-center">
+            <img src="img/doctor_3.jpg" alt="Image Placeholder" class="img-fluid">
+            <div class="media-body">
+              <h3 class="mt-0 text-black">Dr. Jean Doe</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>
+                <a href="#" class="p-2">
+                  <span class="fa fa-facebook"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-twitter"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-linkedin"></span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 element-animate">
+          <div class="media d-block media-custom text-center">
+            <img src="img/doctor_4.jpg" alt="Image Placeholder" class="img-fluid">
+            <div class="media-body">
+              <h3 class="mt-0 text-black">Dr. Jessica Doe</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>
+                <a href="#" class="p-2">
+                  <span class="fa fa-facebook"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-twitter"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-linkedin"></span>
+                </a>
+              </p>
+            </div>
+          </div>       </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-md-3 element-animate">
+          <div class="media d-block media-custom text-center">
+            <img src="img/doctor_1.jpg" alt="Image Placeholder" class="img-fluid">
+            <div class="media-body">
+              <h3 class="mt-0 text-black">Dr. Carl Smith</h3>
+              <p>Meet your Doctors.</p>
+              <p>
+                <a href="#" class="p-2">
+                  <span class="fa fa-facebook"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-twitter"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-linkedin"></span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 element-animate">
+          <div class="media d-block media-custom text-center">
+            <img src="img/doctor_2.jpg" alt="Image Placeholder" class="img-fluid">
+            <div class="media-body">
+              <h3 class="mt-0 text-black">Dr. Janice Doe</h3>
+              <p></p>
+              <p>
+                <a href="#" class="p-2">
+                  <span class="fa fa-facebook"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-twitter"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-linkedin"></span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 element-animate">
+          <div class="media d-block media-custom text-center">
+            <img src="img/doctor_3.jpg" alt="Image Placeholder" class="img-fluid">
+            <div class="media-body">
+              <h3 class="mt-0 text-black">Dr. Jean Doe</h3>
+              <p>p>
+              <p>
+                <a href="#" class="p-2">
+                  <span class="fa fa-facebook"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-twitter"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-linkedin"></span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 element-animate">
+          <div class="media d-block media-custom text-center">
+            <img src="img/doctor_4.jpg" alt="Image Placeholder" class="img-fluid">
+            <div class="media-body">
+              <h3 class="mt-0 text-black">Dr. Jessica Doe</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>
+                <a href="#" class="p-2">
+                  <span class="fa fa-facebook"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-twitter"></span>
+                </a>
+                <a href="#" class="p-2">
+                  <span class="fa fa-linkedin"></span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row element-animate">
+        <div class="col-md-5">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#">Previous</a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">3</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">4</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">5</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <a href="#" class="cta-link element-animate" data-toggle="modal" data-target="#modalAppointment">
+    <span class="sub-heading">Ready to Visit?</span>
+    <span class="heading">Make an Appointment</span>
+  </a>
+  <!-- END cta-link -->
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="row mb-5 element-animate">
+        <div class="col-md-3 mb-5">
+          <h3>Services</h3>
+          <ul class="footer-link list-unstyled">
+            <li>
+              <a href="#">Find a doctor</a>
+            </li>
+            <li>
+              <a href="#">Urgent Care</a>
+            </li>
+            <li>
+              <a href="#">Emergency Care</a>
+            </li>
+            <li>
+              <a href="#">Procedures &amp; Treatments</a>
+            </li>
+            <li>
+              <a href="#">Online Services</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-5">
+          <h3>Latest News</h3>
+          <ul class="footer-link list-unstyled">
+            <li>
+              <a href="#">News &amp; Press Releases</a>
+            </li>
+            <li>
+              <a href="#">Health Care Professional News</a>
+            </li>
+            <li>
+              <a href="#">Events &amp; Conferences</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-5">
+          <h3>About</h3>
+          <ul class="footer-link list-unstyled">
+            <li>
+              <a href="#">About The Hospital</a>
+            </li>
+            <li>
+              <a href="#">Testimonials</a>
+            </li>
+            <li>
+              <a href="#">Accreditations &amp; Awards</a>
+            </li>
+            <li>
+              <a href="#">Careers</a>
+            </li>
+            <li>
+              <a href="#">Feedback</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-5">
+          <h3>Location &amp; Contact</h3>
+          <p class="mb-5">134 Street Name, City Name Here, United States</p>
+
+          <h4 class="text-uppercase mb-3 h6 text-white">Email</h5>
+            <p class="mb-5">
+              <a href="mailto:info@yourdomain.com">info@yourdomain.com</a>
+            </p>
+
+            <h4 class="text-uppercase mb-3 h6 text-white">Phone</h5>
+              <p>+1 24 435 3533</p>
+
+        </div>
+      </div>
+
+      <div class="row pt-md-3 element-animate">
+        <div class="col-md-12">
+          <hr class="border-t">
+        </div>
+        <div class="col-md-6 col-sm-12 copyright">
+          <p>&copy; 2018 Colorlib Medi+. Designed &amp; Developed by
+            <a href="https://colorlib.com/">Colorlib</a>
+          </p>
+        </div>
+        <div class="col-md-6 col-sm-12 text-md-right text-sm-left">
+          <a href="#" class="p-2">
+            <span class="fa fa-facebook"></span>
+          </a>
+          <a href="#" class="p-2">
+            <span class="fa fa-twitter"></span>
+          </a>
+          <a href="#" class="p-2">
+            <span class="fa fa-instagram"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END footer -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAppointmentLabel">Appointment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="appointment_name" class="text-black">Full Name</label>
+              <input type="text" class="form-control" id="appointment_name">
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="appointment_date" class="text-black">Date</label>
+                  <input type="text" class="form-control" id="appointment_date">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="appointment_time" class="text-black">Time</label>
+                  <input type="text" class="form-control" id="appointment_time">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="appointment_message" class="text-black">Message</label>
+              <textarea name="" id="appointment_message" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="button" value="Book Appointment" onclick="bookAppointment()" class="btn btn-primary">
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-functions.js"></script>
+  <script src="https://apis.google.com/js/platform.js"></script>
+  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+  <script type="text/javascript">
+    var loggedInUser, userLocation;
+    var config = {
+      apiKey: "AIzaSyCX9eUGvWTcQ2ZtzBg1VJjx2o2o4-LUECw",
+      authDomain: "colorlib-1524316894066.firebaseapp.com",
+      databaseURL: "https://colorlib-1524316894066.firebaseio.com",
+      projectId: "colorlib-1524316894066",
+      storageBucket: "colorlib-1524316894066.appspot.com",
+      messagingSenderId: "339327160402"
+    };
+    firebase.initializeApp(config);
+
+
+
+    // window.onLoadCallback = function(){
+    // gapi.auth2.init({
+    //     client_id: '339327160402-tlvlb3k51h957ffal0l0btmfgng9lt81.apps.googleusercontent.com'
+    //   });
+    // }
+    // Client ID and API key from the Developer Console
+    var CLIENT_ID = '339327160402-t8rr0q4umbsoddqrm27hddg6b3dv4q80.apps.googleusercontent.com';
+    var API_KEY = 'AIzaSyAYooaqP2ug7rOsTGIL12GtwJU0nGzD_Bs';
+    // Array of API discovery doc URLs for APIs used by the quickstart
+    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
+
+    // Authorization scopes required by the API; multiple scopes can be
+    // included, separated by spaces.
+    var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send  https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive.metadata.readonly';
+
+    var authorizeButton = document.getElementById('authorize-button');
+    var signoutButton = document.getElementById('signout-button');
+
+    /**
+     *  On load, called to load the auth2 library and API client library.
+     */
+    function handleClientLoad() {
+      gapi.load('client:auth2', initClient);
+    }
+    handleClientLoad();
+    /**
+     *  Initializes the API client library and sets up sign-in state
+     *  listeners.
+     */
+    function initClient() {
+      gapi.client.init({
+        discoveryDocs: DISCOVERY_DOCS,
+        clientId: CLIENT_ID,
+        scope: SCOPES
+      }).then(function () {
+        // Listen for sign-in state changes.
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        // Handle the initial sign-in state.
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        authorizeButton.onclick = handleAuthClick;
+        signoutButton.onclick = handleSignoutClick;
+      });
+    }
+
+    function updateSigninStatus(isSignedIn) {
+      if (isSignedIn) {
+        authorizeButton.style.display = 'none';
+        signoutButton.style.display = 'block';
+
+
+
+        // Use gapi.client.request(args) function
+        var request = gapi.client.request({
+          'method': 'GET',
+          'path': '/drive/v3/about',
+          'params': { 'fields': 'user' }
+        });
+        // Execute the API request.
+        request.execute(function (response) {
+          console.log(response)
+          loggedInUser = response.user.emailAddress
+        });
+        listLabels();
+      } else {
+        authorizeButton.style.display = 'block';
+        signoutButton.style.display = 'none';
+      }
+    }
+
+    /**
+     *  Sign in the user upon button click.
+     */
+    function handleAuthClick(event) {
+      gapi.auth2.getAuthInstance().signIn();
+    }
+
+    /**
+     *  Sign out the user upon button click.
+     */
+    function handleSignoutClick(event) {
+      gapi.auth2.getAuthInstance().signOut();
+    }
+
+    function appendPre(message) {
+      var pre = document.getElementById('content');
+      var textContent = document.createTextNode(message + '\n');
+      pre.appendChild(textContent);
+    }
+
+    function listLabels() {
+    }
+    function bookAppointment() {
+      console.log(loggedInUser);
+      console.log(document.getElementById('appointment_name').value);
+      clientName = document.getElementById('appointment_name').value;
+      appointmentDate = document.getElementById('appointment_date').value;
+      appointmentTime = document.getElementById('appointment_time').value;
+      message = document.getElementById('appointment_message').value;
+
+      sendMessage(
+        {
+          'To': loggedInUser,
+          'Subject': "Appoinment"
+        },
+        'Dear User ,' +
+        'You have booked an appointment on' + appointmentDate + ' at ' + appointmentTime
+        ,
+        composeTidy
+      );
+
+      return false;
+    }
+    function sendMessage(headers_obj, message, callback) {
+      var email = '';
+
+      for (var header in headers_obj)
+        email += header += ": " + headers_obj[header] + "\r\n";
+
+      email += "\r\n" + message;
+
+      var sendRequest = gapi.client.gmail.users.messages.send({
+        'userId': 'me',
+        'resource': {
+          'raw': window.btoa(email).replace(/\+/g, '-').replace(/\//g, '_')
+        }
+      });
+
+      return sendRequest.execute(callback);
+    }
+
+    function composeTidy() {
+
+    }
+    // Note: This example requires that you consent to location sharing when
+    // prompted by your browser. If you see the error "The Geolocation service
+    // failed.", it means you probably did not give permission for the browser to
+    // locate you.
+    // var map, infoWindow , userLocation;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 6
+      });
+      infoWindow = new google.maps.InfoWindow;
+
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          userLocation = pos;
+          console.log(position)
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          infoWindow.open(map);
+          map.setCenter(pos);
+          map.setZoom(10)
+        }, function () {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+      infoWindow.open(map);
+    }
+    function searchDoctors() {
+      /* var rootRef = firebase.database().ref();
+rootRef.once("value")
+  .then(function(snapshot) {
+    console.log(snapshot)
+    var key = snapshot.key; // null
+    var childKey = snapshot.child("users/ada").key; // "ada"
+  }); */
+  
+  const firestore = firebase.firestore();
+  const settings = {/* your settings... */ timestampsInSnapshots: true};
+  firestore.settings(settings);
+      var docRef = firestore.collection("doctors");
+  console.log(docRef)
+      docRef.get().then(function (doc) {
+        console.log(doc)
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+
+      firebase.database().ref("colorlib-1524316894066").child('doctors').once("value", function (snapshot) {
+        console.log(snapshot);
+        snapshot.forEach(function (childSnapshot) {
+          // key
+          var key = childSnapshot.key;
+          // value, could be object
+          var childData = childSnapshot.val();
+          console.log(childData)
+          // Do what you want with these key/values here
+        });
+      });
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 6
+      });
+      var searchParams = document.getElementById("search-doctor").value;
+      var request = {
+        location: userLocation,
+        radius: '500',
+        type: ['doctor']
+      };
+      var service = new google.maps.places.PlacesService(document.getElementById('searchedDoctors'));
+      service.nearbySearch(request, callback)
+
+    }
+    function callback(results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        console.log(results);
+        var docDetails = [];
+        for (var i = 0; i < results.length; i++) {
+          docDetails.push({
+            name: results[i].name,
+            place: results[i].vicinity,
+            email: "venkateshganta81@gmail.com"
+          })
+          // createMarker(results[i]);
+        }
+        var x;
+        for (var i = 0; i < docDetails.length; i++) {
+          x = document.getElementById('searchedDoctors');
+          x.innerHTML += "<div class='col-md-3'>" +
+            "<a href='#' data-toggle='modal' data-target='#modalAppointment'>" +
+            "<div class='media d-block media-custom text-center'>" +
+            "<img src='img/doctor.jpg' alt='Image Placeholder' class='img-fluid'>" +
+            "<div class='media-body'>" +
+            "<h3 class='mt-0 text-black'>" + docDetails[i].name + "</h3>" +
+            "<p>" + docDetails[i].place + "</p>" +
+            "<p>" +
+            "<a href='#' class='p-2'>" +
+            " <span class='fa fa-facebook'></span>" +
+            "</a>" +
+            "<a href='#' class='p-2'>" +
+            " <span class='fa fa-twitter'></span>" +
+            "</a>" +
+            "<a href='#' class='p-2'>" +
+            "<span class='fa fa-linkedin'></span>" +
+            "</a>" +
+            "</p>" +
+            "</div>" +
+            "</a>" +
+            "</div>"
+        }
+      }
+    }
+  </script>
+  
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/jquery.timepicker.min.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/main.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYooaqP2ug7rOsTGIL12GtwJU0nGzD_Bs&libraries=places&callback=initMap"></script>
+
+
+</body>
+
+</html>
